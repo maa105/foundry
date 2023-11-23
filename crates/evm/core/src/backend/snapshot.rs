@@ -6,7 +6,7 @@ use revm::{
 use serde::{Deserialize, Serialize};
 
 /// A minimal abstraction of a state at a certain point in time
-#[derive(Default, Clone, Debug, Serialize, Deserialize)]
+#[derive(Default, Debug, Serialize, Deserialize)]
 pub struct StateSnapshot {
     pub accounts: Map<Address, AccountInfo>,
     pub storage: Map<Address, Map<U256, U256>>,
