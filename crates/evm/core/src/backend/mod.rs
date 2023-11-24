@@ -904,13 +904,11 @@ impl DatabaseExt for Backend {
     }
 
     /// Clear all snapshots and associated memory.
-    fn clear(&mut self, current_state: &JournaledState) {
+    fn clear(&mut self, _journaled_state: &JournaledState) {
         trace!("Clearing snapshots");
         
         // Clear the snapshots map
         self.inner.snapshots.clear_all();
-        // Clean journal
-        current_state.finalize();
 
         trace!("Snapshots cleared");
     }
