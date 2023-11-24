@@ -79,6 +79,9 @@ pub trait DatabaseExt: Database<Error = DatabaseError> {
     /// once. After a successful revert, the same snapshot id cannot be used again.
     fn snapshot(&mut self, journaled_state: &JournaledState, env: &Env) -> U256;
 
+    /// clears all snapshots
+    fn clear(&mut self, journaled_state: &JournaledState);
+
     /// Reverts the snapshot if it exists
     ///
     /// Returns `true` if the snapshot was successfully reverted, `false` if no snapshot for that id
@@ -900,6 +903,19 @@ impl DatabaseExt for Backend {
         id
     }
 
+    /// Clear all snapshots and associated memory.
+    fn clear(&mut self, current_state: &JournaledState) {
+        trace!("Clearing snapshots");
+        
+        // Clear the snapshots map
+        self.inner.snapshots.clear_all();
+        // Clean journal
+        current_state.finalize();
+
+        trace!("Snapshots cleared");
+    }
+
+    
     fn revert(
         &mut self,
         id: U256,

@@ -103,6 +103,10 @@ impl<'a> DatabaseExt for FuzzBackendWrapper<'a> {
         self.backend_mut(env).snapshot(journaled_state, env)
     }
 
+    fn clear(&mut self, journaled_state: &JournaledState) {
+        trace!("fuzz: clear snapshots not implemented");
+    }
+
     fn revert(
         &mut self,
         id: U256,

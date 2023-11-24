@@ -340,6 +340,13 @@ impl Cheatcode for revertToCall {
     }
 }
 
+impl Cheatcode for clearSnapshotsCall {
+    fn apply_full<DB: DatabaseExt>(&self, ccx: &mut CheatsCtxt<DB>) -> Result {
+        let Self {} = self;
+        Ok(ccx.data.db.clear(&ccx.data.journaled_state).abi_encode())
+    }
+}
+
 impl Cheatcode for startStateDiffRecordingCall {
     fn apply(&self, state: &mut Cheatcodes) -> Result {
         let Self {} = self;

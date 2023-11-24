@@ -45,6 +45,11 @@ impl<T> Snapshots<T> {
         self.snapshots.insert(id, snapshot);
         id
     }
+
+    /// Clears all snapshots and releases associated memory.
+    pub fn clear_all(&mut self) {
+        self.snapshots.clear();
+    }
 }
 
 impl<T> Default for Snapshots<T> {

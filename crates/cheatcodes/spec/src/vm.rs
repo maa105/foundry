@@ -415,6 +415,10 @@ interface Vm {
     #[cheatcode(group = Evm, safety = Unsafe)]
     function revertTo(uint256 snapshotId) external returns (bool success);
 
+    /// cleat all snapshots
+    #[cheatcode(group = Evm, safety = Unsafe)]
+    function clearSnapshots() external;
+
     // -------- Forking --------
     // --- Creation and Selection ---
 
